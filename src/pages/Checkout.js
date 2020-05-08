@@ -3,25 +3,33 @@ import { Modal, Row, Col, Accordion, Card, Button } from "react-bootstrap";
 import "../css/order-checkout.css";
 
 function Checkout() {
-
   const orderDate = {
-    order:
-    {
-      memberId:0,
-      productId:0,
-      consigneeId:0,
-      receiptId:0,
-      
-      amount:0,
+    order: {
+      memberId: 1,
+      orderDate: 20190101164823,
+      originalTotal: 1400,
+      originalDiscount: 100,
+      orderTotal: 1300,
+      couponCode: "APAPAKg",
+      orderState: 2,
     },
-    orderDetail:
-    {
-      memberId:0,
-      productId:0,
-      amount:0,
-    }
-  }
-
+    orderDetail: [
+      {
+        productId: 1,
+        originalProductPrice: 1000,
+        originalProductDiscount: 0,
+        discountPrice:1000,
+        quantity:2,
+      },
+      {
+        productId: 2,
+        originalProductPrice: 500,
+        originalProductDiscount: 0,
+        discountPrice:500,
+        quantity:1,
+      },
+    ],
+  };
 
   return (
     <>

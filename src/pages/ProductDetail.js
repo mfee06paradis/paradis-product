@@ -67,6 +67,7 @@ function MyVerticallyCenteredModal(props) {
   );
 }
 
+
 function ProductDetail() {
   const [modalShow, setModalShow] = useState(false);
   const [product, setProduct] = useState({
@@ -91,7 +92,25 @@ function ProductDetail() {
 
   // 要送給購物車的資料
   
-  // const aa = {[{}]}
+  const [cart, setCart] = useState( {
+    cartItem:[
+    {
+      memberId:1,
+      productId:1,
+      amount:2,
+    },
+    {
+      memberId:1,
+      productId:3,
+      amount:4,
+    },
+    {
+      memberId:1,
+      productId:5,
+      amount:2,
+    },
+  ]}
+  )
 
   // ======================================
   useEffect(() => {
@@ -99,11 +118,17 @@ function ProductDetail() {
     console.log("product.productItems = " + product.productItems);
   }, []);
 
+  // 購物車 - 資料更新
+  useEffect( () => {
+    console.log("購物車資料成功更新")
+  }, [cart])
+
+  // get商品資料
   const fetchProduct = (url) => {
     console.log("fetch Data");
     axios
       .get(url)
-      .then((res) => {
+      .then((res, cart) => {
         const jsonRst = res.data;
         // this.setState({ persons });
         console.log(jsonRst);
@@ -114,11 +139,14 @@ function ProductDetail() {
         console.log(err);
       });
   };
+
+
+  // POST 商品資料 to Cart
 
   const sendtoProductData = (url) => {
     console.log("fetch Data");
     axios
-      .get(url)
+      .post(url)
       .then((res) => {
         const jsonRst = res.data;
         // this.setState({ persons });
@@ -130,6 +158,17 @@ function ProductDetail() {
         console.log(err);
       });
   };
+
+  // 加入購物車方法
+
+  const addItemToCart = (cartItem) => {
+
+    console.log("cartItem = " + cartItem );
+    
+    console.log("資料傳遞成功")
+    // setCart(event) 
+    
+  }
 
   return (
     <>
@@ -153,7 +192,11 @@ function ProductDetail() {
                         colors={product.productItems.map((item) => item.color)}
                         companyName={product.productItems[0].companyName}
                         unitPrice={product.productItems[0].unitPrice}
-                      />
+                        addToCart = {addItemToCart}
+                        />
+                        
+                        
+              
 
                       <div style={{ height: 300 + "px" }}>
                         <ProductDate
